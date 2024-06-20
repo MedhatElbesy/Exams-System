@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 
 import AdminDashboard from "./components/admin/AdminDashboard";
@@ -20,6 +21,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/create-exam" element={<ExamCreate />} />
           <Route
