@@ -13,7 +13,8 @@ import ExamCreate from "./components/admin/ExamCreate";
 import QuestionCreate from "./components/admin/QuestionCreate";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Home from "./components/Layout/Home";
+import Home from "./components/layout/Home";
+import StudentHome from "./components/student/StudentHome";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          <Route path="/home" element={<StudentHome />} />
+
 
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/create-exam" element={<ExamCreate />} />
