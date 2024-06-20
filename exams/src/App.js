@@ -10,18 +10,14 @@ import ExamCreate from "./components/admin/ExamCreate";
 function App() {
   return (
     <Provider store={store}>
-
       <Router>
-    <Routes>
-    <Route path="/admin" element={<AdminDashboard />} />
-    <Route path="/admin/create-exam" element={<ExamCreate />} />
-
-      </Routes>
-
+        <Routes>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/create-exam" element={<ExamCreate />} />
+        </Routes>
       </Router>
       <ToastContainer position="top-center" autoClose={1500} />
     </Provider>
-
   );
 }
 
