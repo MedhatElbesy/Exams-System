@@ -13,6 +13,7 @@ import ExamCreate from "./components/admin/ExamCreate";
 import QuestionCreate from "./components/admin/QuestionCreate";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import Home from "./components/Layout/Home";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
+          <Route path="/" element={<Home />} />
+
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
