@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ExamCreate from "./components/admin/ExamCreate";
+import QuestionCreate from "./components/admin/QuestionCreate";
+
 
 function App() {
   return (
@@ -14,6 +16,10 @@ function App() {
         <Routes>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/create-exam" element={<ExamCreate />} />
+          <Route
+              path="/admin/:examId/add-question"
+              element={<QuestionCreate />}
+            />
         </Routes>
       </Router>
       <ToastContainer position="top-center" autoClose={1500} />
