@@ -15,7 +15,7 @@ import {
 
 const ExamList = () => {
   const dispatch = useDispatch();
-  const { exams, loading } = useSelector((state) => state.exams);
+  const { exams, loading, error } = useSelector((state) => state.exams);
 
   useEffect(() => {
     dispatch(fetchExams());
@@ -49,7 +49,7 @@ const ExamList = () => {
                   <ListItem
                     key={exam._id}
                     component={RouterLink}
-                    to={/exams/${exam._id}}
+                    to={`/exams/${exam._id}`}
                     sx={{
                       borderRadius: 8,
                       mb: 2,
@@ -78,6 +78,16 @@ const ExamList = () => {
                   </ListItem>
                 ))}
               </List>
+            )}
+            {error && (
+              <Typography
+                color="error"
+                variant="body2"
+                align="center"
+                sx={{ mt: 2 }}
+              >
+                {error}
+              </Typography>
             )}
           </Paper>
         </Grid>
