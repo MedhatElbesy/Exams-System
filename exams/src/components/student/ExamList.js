@@ -5,6 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 import {
   Container,
   Typography,
+  CircularProgress,
   List,
   ListItem,
   ListItemText,
@@ -14,7 +15,7 @@ import {
 
 const ExamList = () => {
   const dispatch = useDispatch();
-  const { exams } = useSelector((state) => state.exams);
+  const { exams, loading } = useSelector((state) => state.exams);
 
   useEffect(() => {
     dispatch(fetchExams());
@@ -38,6 +39,11 @@ const ExamList = () => {
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={8}>
           <Paper elevation={3} sx={{ p: 2 }}>
+            {loading ? (
+              <Grid container justifyContent="center" sx={{ mt: 4 }}>
+                <CircularProgress />
+              </Grid>
+            ) : (
               <List sx={{ width: "100%" }}>
                 {exams.map((exam) => (
                   <ListItem
@@ -72,6 +78,7 @@ const ExamList = () => {
                   </ListItem>
                 ))}
               </List>
+            )}
           </Paper>
         </Grid>
       </Grid>
