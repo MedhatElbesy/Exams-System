@@ -8,16 +8,18 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
+import Navbar from "./components/layout/Navbar";
+import Home from "./components/layout/Home";
+import Footer from "./components/layout/Footer";
+
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ExamCreate from "./components/admin/ExamCreate";
 import QuestionCreate from "./components/admin/QuestionCreate";
 
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
-import Home from "./components/layout/Home";
 import StudentHome from "./components/student/StudentHome";
 import ExamList from "./components/student/ExamList";
 import ExamDetail from "./components/student/ExamDetail";
+import ExamTake from "./components/student/ExamTake";
 
 function App() {
   return (
@@ -33,7 +35,7 @@ function App() {
           <Route path="/home" element={<StudentHome />} />
           <Route path="/exams" element={<ExamList />} />
           <Route path="/exams/:examId" element={<ExamDetail />} />
-
+          <Route path="/exams/:examId/take" element={<ExamTake />} />
 
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/create-exam" element={<ExamCreate />} />
