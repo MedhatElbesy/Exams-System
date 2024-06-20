@@ -7,25 +7,17 @@ export const createExam = createAsyncThunk(
   "exams/createExam",
   async (examData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        `${baseURL}/exams`,
-        examData,
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await axios.post(`${baseURL}/exams`, examData, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response);
     }
   }
 );
-
-
-
-
 
 const examSlice = createSlice({
   name: "exams",
@@ -50,7 +42,7 @@ const examSlice = createSlice({
       .addCase(createExam.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
+      });
   },
 });
 
