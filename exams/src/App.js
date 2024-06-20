@@ -16,6 +16,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./components/layout/Home";
 import StudentHome from "./components/student/StudentHome";
+import ExamList from "./components/student/ExamList";
 
 function App() {
   return (
