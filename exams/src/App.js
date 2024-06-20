@@ -11,9 +11,10 @@ import Register from "./components/auth/Register";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ExamCreate from "./components/admin/ExamCreate";
 import QuestionCreate from "./components/admin/QuestionCreate";
+
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Home from "./components/Layout/Home";
+import Home from "./components/layout/Home";
 
 function App() {
   return (
@@ -22,7 +23,6 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
