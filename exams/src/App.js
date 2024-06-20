@@ -8,17 +8,17 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
-
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ExamCreate from "./components/admin/ExamCreate";
 import QuestionCreate from "./components/admin/QuestionCreate";
-
-
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -30,6 +30,7 @@ function App() {
             element={<QuestionCreate />}
           />
         </Routes>
+        <Footer />
       </Router>
       <ToastContainer position="top-center" autoClose={1500} />
     </Provider>
