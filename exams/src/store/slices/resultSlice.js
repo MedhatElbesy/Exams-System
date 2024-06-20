@@ -23,6 +23,19 @@ export const submitExam = createAsyncThunk(
   }
 );
 
+export const fetchResults = createAsyncThunk(
+  "results/fetchResults",
+  async (examId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${baseURL}/results/${examId}`, {
+        headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
 
 const resultsSlice = createSlice({
   name: "results",
@@ -48,7 +61,19 @@ const resultsSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-
+      .addCase(fetchResults.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchResults.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.results = action.payload;
+      })
+      .addCase(fetchResults.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 
