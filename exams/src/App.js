@@ -19,6 +19,7 @@ function App() {
       </Routes>
 
       </Router>
+      <ToastContainer position="top-center" autoClose={1500} />
     </Provider>
 
   );
