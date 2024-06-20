@@ -30,6 +30,7 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           <Route path="/home" element={<StudentHome />} />
+          <Route path="/exams" element={<ExamList />} />
 
 
           <Route path="/admin" element={<AdminDashboard />} />
