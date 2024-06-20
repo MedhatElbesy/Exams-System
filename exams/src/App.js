@@ -20,6 +20,8 @@ import StudentHome from "./components/student/StudentHome";
 import ExamList from "./components/student/ExamList";
 import ExamDetail from "./components/student/ExamDetail";
 import ExamTake from "./components/student/ExamTake";
+import Results from "./components/student/Result";
+
 
 function App() {
   return (
