@@ -50,6 +50,21 @@ export const fetchExamById = createAsyncThunk(
   }
 );
 
+export const updateExam = createAsyncThunk(
+  "exams/updateExam",
+  async ({ examId, examData }) => {
+    try {
+      const response = await axios.put(`${baseURL}/exams/${examId}`, examData);
+      return response.data;
+    } catch (error) {
+      throw Error(
+        error.response?.data?.message ||
+          `Failed to update exam with ID ${examId}`
+      );
+    }
+  }
+);
+
 const examSlice = createSlice({
   name: "exams",
   initialState: {
@@ -100,7 +115,21 @@ const examSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-
+      .addCase(updateExam.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateExam.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.exams = state.exams.map((exam) =>
+          exam._id === action.payload._id ? action.payload : exam
+        );
+      })
+      .addCase(updateExam.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 
