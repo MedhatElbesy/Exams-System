@@ -17,6 +17,7 @@ import Footer from "./components/layout/Footer";
 import Home from "./components/layout/Home";
 import StudentHome from "./components/student/StudentHome";
 import ExamList from "./components/student/ExamList";
+import ExamDetail from "./components/student/ExamDetail";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
 
           <Route path="/home" element={<StudentHome />} />
           <Route path="/exams" element={<ExamList />} />
+          <Route path="/exams/:examId" element={<ExamDetail />} />
 
 
           <Route path="/admin" element={<AdminDashboard />} />
