@@ -38,6 +38,7 @@ function App() {
           <Route path="/exams" element={<ExamList />} />
           <Route path="/exams/:examId" element={<ExamDetail />} />
           <Route path="/exams/:examId/take" element={<ExamTake />} />
+          <Route path="/exams/:examId/results" element={<Results />} />
 
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/create-exam" element={<ExamCreate />} />
