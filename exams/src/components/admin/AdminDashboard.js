@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
       <Paper
-        style={{
+        sx={{
           margin: "40px auto",
           padding: "32px",
           maxWidth: "600px",
@@ -26,7 +26,7 @@ const AdminDashboard = () => {
         <Typography
           variant="h4"
           component="h2"
-          style={{
+          sx={{
             marginBottom: "24px",
             textAlign: "center",
             color: "#3949a0",
@@ -38,16 +38,34 @@ const AdminDashboard = () => {
         <List component="nav">
           <ListItem
             component={Link}
-            to="/exams"
-            style={{ borderBottom: "1px solid #ccc" }}
+            to="manage"
+            sx={{
+              borderBottom: "1px solid #ccc",
+              color: "#3949a0",
+              fontWeight: "bold",
+              textDecoration: "none",
+              transition: "transform 0.3s ease-in-out",
+              "&:hover": {
+                backgroundColor: "#e0e0e0",
+              },
+            }}
           >
             <ListItemText primary="Manage Exams" />
           </ListItem>
           <Divider />
           <ListItem
             component={Link}
-            to="/admin/create-exam"
-            style={{ borderBottom: "1px solid #ccc" }}
+            to="create-exam"
+            sx={{
+              borderBottom: "1px solid #ccc",
+              color: "#3949a0",
+              fontWeight: "bold",
+              textDecoration: "none",
+              transition: "transform 0.3s ease-in-out",
+              "&:hover": {
+                backgroundColor: "#e0e0e0",
+              },
+            }}
           >
             <ListItemText primary="Create Exam" />
           </ListItem>
