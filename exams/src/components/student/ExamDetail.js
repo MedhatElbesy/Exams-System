@@ -12,7 +12,7 @@ import {
 
 const ExamDetail = () => {
   const { examId } = useParams();
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const navigate = useNavigate();
   const { exams, loading } = useSelector((state) => state.exams);
   const exam = exams.find((exam) => exam._id === examId);
 
