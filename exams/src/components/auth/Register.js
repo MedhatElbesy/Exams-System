@@ -45,7 +45,7 @@ const Register = () => {
           toast.error(message);
           break;
         default:
-          console.log(message);
+          navigate("/server-error");
       }
     }
   };
