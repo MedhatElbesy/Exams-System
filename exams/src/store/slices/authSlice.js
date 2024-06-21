@@ -18,8 +18,6 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, { rejectWithValue }) => {
-    sessionStorage.removeItem("isAdmin");
-    sessionStorage.removeItem("token");
     try {
       const response = await axios.post(`${baseURL}/auth/login`, userData);
       return response.data;
@@ -68,7 +66,6 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.isAuthenticated = true;
         sessionStorage.setItem("token", action.payload.token);
-        console.log(action.payload.user.isAdmin);
         action.payload.user.isAdmin && sessionStorage.setItem(
           "isAdmin",
           action.payload.user.isAdmin
