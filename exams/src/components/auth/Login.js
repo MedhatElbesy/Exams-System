@@ -7,7 +7,6 @@ import { Container, Typography, TextField, Button, Box } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
-  
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
@@ -42,7 +41,7 @@ const Login = () => {
           toast.error(message);
           break;
         default:
-          console.log(message);
+          navigate("/server-error");
       }
     }
   };
