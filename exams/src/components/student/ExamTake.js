@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { submitExam } from "../../store/slices/resultSlice";
+import { submitExam } from "../../store/slices/resultSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Paper, CircularProgress, Grid } from "@mui/material";
 import ExamHeader from "./exam/ExamHeader";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 const ExamTake = () => {
   const { examId } = useParams();
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { exams, loading } = useSelector((state) => state.exams);
   const exam = exams.find((exam) => exam._id === examId);
   const [answers, setAnswers] = useState([]);
@@ -34,8 +34,8 @@ const ExamTake = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // await dispatch(submitExam({ examId, answers })).unwrap();
-      // navigate(`/exams/${examId}/results`);
+      await dispatch(submitExam({ examId, answers })).unwrap();
+      navigate(`/exams/${examId}/results`);
     } catch (error) {
       // Handle errors
       const status = error.status;

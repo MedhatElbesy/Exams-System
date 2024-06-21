@@ -73,10 +73,9 @@ const getExamResults = async (req, res) => {
       exam: examId,
       student: req.user.id,
     })
-      .populate("exam", "title")
+      .populate("exam", "title questions")
       .select("_id score")
       .exec();
-      console.log(result);
     res.json(result);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch exam results" });

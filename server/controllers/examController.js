@@ -1,9 +1,9 @@
 const Exam = require("../models/Exam");
+const Question = require("../models/Question");
 const errorHandler = require("../utils/errorHandler");
 
 const createExam = async (req, res) => {
   const { title, description, duration } = req.body;
-  console.log(req.body);
   try {
     const exam = new Exam({ title, description, duration });
     await exam.save();
@@ -30,12 +30,12 @@ const getExamById = async (req, res) => {
 
   try {
     const exam = await Exam.findById(id, {
-      "questions.answer": 0,
+      "questions": 0,
     });
     if (!exam) {
       return res.status(404).json({ message: "exam not found" });
     }
-    res.json({ message: "exam created successfully" });
+    res.json(exam);
   } catch (error) {
     errorHandler(error, res);
   }
@@ -54,7 +54,7 @@ const updateExam = async (req, res) => {
     if (!updatedExam) {
       return res.status(404).json({ message: "Exam not found" });
     }
-    res.json(updatedExam);
+    res.json({message: "exam updated successfully"});
   } catch (error) {
     errorHandler(error, res);
   }
@@ -68,7 +68,10 @@ const deleteExam = async (req, res) => {
     if (!deletedExam) {
       return res.status(404).json({ message: "Exam not found" });
     }
-    res.json({ message: "Exam deleted successfully" });
+
+    await Question.deleteMany({ examId: id });
+
+    res.json({ message: "Exam and associated questions deleted successfully" });
   } catch (error) {
     errorHandler(error, res);
   }

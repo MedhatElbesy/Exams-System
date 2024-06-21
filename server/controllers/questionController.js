@@ -3,7 +3,6 @@ const Question = require("../models/Question");
 const errorHandler = require("../utils/errorHandler");
 
 const addQuestion = async (req, res) => {
-  // const { id } = req.params;
   const { examId, question, options, answer } = req.body;
 
   try {
@@ -24,46 +23,64 @@ const addQuestion = async (req, res) => {
   }
 };
 
+const getQuestions = async (req, res) => {
+  const { examId } = req.params;
+
+  try {
+    const questions = await Question.find({ examId });
+    if (!questions) {
+      return res.status(404).json({ message: "Questions not found" });
+    }
+
+    res.json(questions);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+};
+
 const updateQuestion = async (req, res) => {
-  const { examId, questionId } = req.params;
+  const { id } = req.params;
   const { question, options, answer } = req.body;
 
   try {
-    const exam = await Exam.findById(examId);
-    if (!exam) {
-      return res.status(404).json({ message: "Exam not found" });
-    }
-
-    const existingQuestion = exam.questions.id(questionId);
-    if (!existingQuestion) {
+    const updatedgQuestion = await Question.findById(id);
+    if (!updatedgQuestion) {
       return res.status(404).json({ message: "Question not found" });
     }
 
-    existingQuestion.question = question;
-    existingQuestion.options = options;
-    existingQuestion.answer = answer;
+    updatedgQuestion.question = question;
+    updatedgQuestion.options = options;
+    updatedgQuestion.answer = answer;
 
-    await exam.save();
+    await updatedgQuestion.save();
 
-    res.json(exam.questions);
+    res.json({
+      message: "Question updated successfully",
+      question: updatedgQuestion,
+    });
   } catch (error) {
     errorHandler(error, res);
   }
 };
 
 const deleteQuestion = async (req, res) => {
-  const { examId, questionId } = req.params;
+  const { examId, id } = req.params;
 
   try {
-    const exam = await Exam.findById(examId);
-    if (!exam) {
-      return res.status(404).json({ message: "Exam not found" });
+    const question = await Question.findById(id);
+    if (!question) {
+      return res.status(404).json({ message: "Question not found" });
     }
 
-    exam.questions.pull({ _id: questionId });
-    await exam.save();
+    await question.deleteOne();
 
-    res.json(exam.questions);
+    const exam = await Exam.findById(examId);
+    if (exam) {
+      exam.questions.pull({ _id: id });
+      await exam.save();
+    }
+
+    res.json({ message: "question deleted successfully" });
   } catch (error) {
     errorHandler(error, res);
   }
@@ -71,6 +88,7 @@ const deleteQuestion = async (req, res) => {
 
 module.exports = {
   addQuestion,
+  getQuestions,
   updateQuestion,
   deleteQuestion,
 };

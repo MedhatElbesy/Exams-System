@@ -4,21 +4,23 @@ const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 const {
   addQuestion,
+  getQuestions,
   updateQuestion,
   deleteQuestion,
 } = require("../controllers/questionController");
 
-router.post("/", authMiddleware, addQuestion);
+router.get("/:examId", authMiddleware, roleMiddleware, getQuestions);
+router.post("/", authMiddleware, roleMiddleware, addQuestion);
 
 router.put(
-  "/:examId/questions/:questionId",
+  "/:id",
   authMiddleware,
   roleMiddleware,
   updateQuestion
 );
 
 router.delete(
-  "/:examId/questions/:questionId",
+  "/:examId/:id",
   authMiddleware,
   roleMiddleware,
   deleteQuestion
