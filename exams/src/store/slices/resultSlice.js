@@ -54,8 +54,6 @@ const resultsSlice = createSlice({
       .addCase(submitExam.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        // Assuming submitted exam result is added to state after submission
-        state.results.push(action.payload);
       })
       .addCase(submitExam.rejected, (state, action) => {
         state.loading = false;
