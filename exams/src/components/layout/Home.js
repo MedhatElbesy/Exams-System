@@ -1,10 +1,16 @@
 import React from "react";
 import { Typography, Container, Box, Button } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const Welcome = () => {
-  const isAuthenticated = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    sessionStorage.getItem("isAdmin")
+      ? navigate(`/admin`)
+      : navigate("/home");
+  };
 
   return (
     <Container
@@ -64,9 +70,7 @@ const Welcome = () => {
         <Button
           variant="contained"
           color="primary"
-          component={RouterLink}
-          to={isAuthenticated ? "/home" : "/login"}
-          // onClick={handleStart}
+          onClick={handleStart}
           sx={{
             backgroundColor: "#3f51b5",
             px: 4,
