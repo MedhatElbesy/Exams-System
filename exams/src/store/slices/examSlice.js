@@ -37,30 +37,48 @@ export const fetchExams = createAsyncThunk(
 
 export const fetchExamById = createAsyncThunk(
   "exams/fetchExamById",
-  async (examId) => {
+  async (examId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${baseURL}/exams/${examId}`);
+      const response = await axios.get(`${baseURL}/exams/${examId}`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
-      throw Error(
-        error.response?.data?.message ||
-          `Failed to fetch exam with ID ${examId}`
-      );
+      return rejectWithValue(error.response);
     }
   }
 );
 
 export const updateExam = createAsyncThunk(
   "exams/updateExam",
-  async ({ examId, examData }) => {
+  async ({ examId, examData }, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`${baseURL}/exams/${examId}`, examData);
+      const response = await axios.put(`${baseURL}/exams/${examId}`, examData, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
-      throw Error(
-        error.response?.data?.message ||
-          `Failed to update exam with ID ${examId}`
-      );
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+export const deleteExam = createAsyncThunk(
+  "exams/deleteExam",
+  async (examId, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`${baseURL}/exams/${examId}`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -129,6 +147,20 @@ const examSlice = createSlice({
       .addCase(updateExam.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(deleteExam.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteExam.fulfilled, (state, action) => {
+        state.loading = false;
+        state.exams = state.exams.filter(
+          (exam) => exam._id !== action.payload.examId
+        );
+      })
+      .addCase(deleteExam.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.data?.message || "Failed to delete exam";
       });
   },
 });
