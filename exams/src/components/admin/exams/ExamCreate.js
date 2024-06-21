@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createExam } from "../../store/slices/examSlice";
+import { createExam } from "../../../store/slices/examSlice";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -39,7 +39,7 @@ const ExamCreate = () => {
           toast.error(message);
           break;
         default:
-          navigate("server-error");
+          navigate("/server-error");
       }
     }
   };
@@ -54,6 +54,13 @@ const ExamCreate = () => {
           p: 4,
         }}
       >
+        <Button
+          sx={{ fontSize: "28px", p: 1 }}
+          color="secondary"
+          onClick={() => navigate("/admin")}
+        >
+          ⬅
+        </Button>
         <Typography
           variant="h4"
           component="h2"

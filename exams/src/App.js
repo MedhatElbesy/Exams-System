@@ -20,6 +20,8 @@ import StudentHome from "./components/student/StudentHome";
 import ExamList from "./components/student/ExamList";
 import ExamDetail from "./components/student/ExamDetail";
 import ExamTake from "./components/student/ExamTake";
+import Results from "./components/student/Result";
+
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
           <Route path="/exams" element={<ExamList />} />
           <Route path="/exams/:examId" element={<ExamDetail />} />
           <Route path="/exams/:examId/take" element={<ExamTake />} />
+          <Route path="/exams/:examId/results" element={<Results />} />
 
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/create-exam" element={<ExamCreate />} />
