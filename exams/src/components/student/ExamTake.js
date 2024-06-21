@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { submitExam } from "../../store/slices/resultSlice";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Paper, CircularProgress, Grid } from "@mui/material";
+import {
+  Container,
+  Paper,
+  CircularProgress,
+  Grid,
+  Button,
+} from "@mui/material";
 import ExamHeader from "./exam/ExamHeader";
 import AnswerForm from "./exam/AnswerForm";
 import Timer from "./exam/Timer";
 import { toast } from "react-toastify";
-
 
 const ExamTake = () => {
   const { examId } = useParams();
@@ -37,7 +42,6 @@ const ExamTake = () => {
       await dispatch(submitExam({ examId, answers })).unwrap();
       navigate(`/exams/${examId}/results`);
     } catch (error) {
-      // Handle errors
       const status = error.status;
       const message = error.data.message;
       switch (status) {
@@ -45,7 +49,7 @@ const ExamTake = () => {
           toast.error(message);
           break;
         default:
-          navigate("server-error");
+          navigate("/server-error");
       }
     }
   };
@@ -61,6 +65,13 @@ const ExamTake = () => {
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
       <Paper elevation={3} sx={{ p: 3, width: "100%" }}>
+        <Button
+          sx={{ fontSize: "28px", p: 1 }}
+          color="secondary"
+          onClick={() => navigate("/exams")}
+        >
+          ⬅
+        </Button>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <ExamHeader title={exam.title} timeLeft={timeLeft} />
