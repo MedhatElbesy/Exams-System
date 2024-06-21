@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExams } from "../../store/slices/examSlice";
-import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -15,11 +15,18 @@ import {
 
 const ExamList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { exams, loading, error } = useSelector((state) => state.exams);
 
   useEffect(() => {
     dispatch(fetchExams());
   }, [dispatch]);
+
+  const handelExamNavigation = (examId) => {
+    sessionStorage.getItem("isAdmin")
+      ? navigate(`/admin/${examId}/edit`)
+      : navigate(`/exams/${examId}/take`);
+  };
 
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
@@ -30,7 +37,7 @@ const ExamList = () => {
         gutterBottom
         sx={{
           fontWeight: 600,
-          color: "#3949a0",
+          color: "#1a237e",
           marginBottom: "1.5rem",
         }}
       >
@@ -38,7 +45,15 @@ const ExamList = () => {
       </Typography>
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={8}>
-          <Paper elevation={3} sx={{ p: 2 }}>
+          <Paper
+            elevation={4}
+            sx={{
+              p: 3,
+              borderRadius: 4,
+              backgroundColor: "#fbf9f9",
+              boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
             {loading ? (
               <Grid container justifyContent="center" sx={{ mt: 4 }}>
                 <CircularProgress />
@@ -48,26 +63,44 @@ const ExamList = () => {
                 {exams.map((exam) => (
                   <ListItem
                     key={exam._id}
-                    component={RouterLink}
-                    to={`/exams/${exam._id}`}
+                    onClick={() =>
+                      exam.questions.length > 0 &&
+                      handelExamNavigation(exam._id)
+                    }
                     sx={{
-                      borderRadius: 8,
+                      borderRadius: 2,
                       mb: 2,
-                      bgcolor: "#ffffff",
+                      bgcolor: exam.questions.length === 0 ? "#e1e1e1" : "#FFF",
                       transition: "background-color 0.3s",
+                      border: "1px solid #e4e4e4",
                       "&:hover": {
-                        bgcolor: "#f5f5f5",
+                        bgcolor:
+                          exam.questions.length === 0 ? "#e1e1e1" : "#f5f5f5",
+                        cursor:
+                          exam.questions.length === 0 ? "auto" : "pointer",
                       },
                     }}
                   >
                     <ListItemText
                       primary={
-                        <Typography
-                          variant="h6"
-                          sx={{ color: "#3949a0", fontWeight: 600 }}
-                        >
-                          {exam.title}
-                        </Typography>
+                        <>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              color:
+                                exam.questions.length === 0
+                                  ? "#555"
+                                  : "#1a237e",
+                              fontWeight: 600,
+                            }}
+                          >
+                            {exam.title}
+                          </Typography>
+                          <Typography variant="body2" sx={{ color: "#555" }}>
+                            {exam.questions.length} questions | {exam.duration}{" "}
+                            minutes
+                          </Typography>
+                        </>
                       }
                       secondary={
                         <Typography variant="body1" sx={{ color: "#555" }}>
