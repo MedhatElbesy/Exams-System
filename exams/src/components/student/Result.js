@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -10,11 +11,13 @@ import {
   List,
   ListItem,
   ListItemText,
+  Button,
 } from "@mui/material";
 import { fetchResults } from "../../store/slices/resultSlice";
 
 const Results = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { examId } = useParams();
   const { results, loading, error } = useSelector((state) => state.results);
 
@@ -24,15 +27,34 @@ const Results = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
-      <Paper elevation={3} sx={{ p: 3 }}>
+      <Paper
+        elevation={4}
+        sx={{
+          p: 3,
+          borderRadius: 4,
+          backgroundColor: "#f3f4f6",
+          boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Button
+          sx={{ fontSize: "28px", p: 1 }}
+          color="secondary"
+          onClick={() => navigate("/exams")}
+        >
+          ⬅
+        </Button>
         <Typography
           variant="h4"
           component="h2"
           align="center"
           gutterBottom
-          sx={{ color: "#3949a0" }}
+          sx={{
+            color: "#1a237e",
+            fontWeight: 600,
+            marginBottom: "1.5rem",
+          }}
         >
-          Exam Results
+          Exam Result
         </Typography>
         {loading ? (
           <Box
@@ -52,7 +74,12 @@ const Results = () => {
                 key={result._id}
                 disablePadding
                 sx={{
-                  transition: "background-color 0.3s",
+                  borderRadius: 2,
+                  mb: 2,
+                  bgcolor: "#fff",
+                  border: "1px solid #D1D1D1",
+                  textAlign: "center",
+                  p: 2,
                 }}
               >
                 <ListItemText
@@ -60,7 +87,7 @@ const Results = () => {
                     <Typography
                       variant="h6"
                       component="p"
-                      sx={{ color: "#333", fontWeight: "bold" }}
+                      sx={{ color: "#1a237e", fontWeight: 600 }}
                     >
                       {result.exam && result.exam.title
                         ? `${result.exam.title} Exam:`
@@ -68,8 +95,8 @@ const Results = () => {
                     </Typography>
                   }
                   secondary={
-                    <Typography variant="body1" sx={{ color: "#666" }}>
-                      Score: {result.score}
+                    <Typography variant="body1" sx={{ color: "#555" }}>
+                      Score: {result.score} / {result.exam.questions.length}
                     </Typography>
                   }
                 />
