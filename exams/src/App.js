@@ -25,7 +25,7 @@ import ExamManage from "./components/admin/exams/ExamManage";
 import QuestionCreate from "./components/admin/questions/QuestionCreate";
 import QuestionsEdit from "./components/admin/questions/QuestionEdit";
 
-import { ProtectedRoute } from "./utils/ProtectedRoute";
+import { ProtectedRoute, PublicRoute } from "./utils/ProtectedRoute";
 
 import NotFound from "./components/error/Error404";
 import InternalServerError from "./components/error/Error500";
@@ -38,9 +38,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
+          {/* Public Routes */}
+          <Route element={<PublicRoute />}>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-
+          </Route>
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>

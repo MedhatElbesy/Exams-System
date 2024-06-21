@@ -16,5 +16,14 @@ const ProtectedRoute = ({ admin }) => {
   return <Outlet />;
 };
 
+const PublicRoute = () => {
+  const isLoggedIn = !!sessionStorage.getItem("token");
 
-export { ProtectedRoute };
+  if (isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
+};
+
+export { ProtectedRoute, PublicRoute };
