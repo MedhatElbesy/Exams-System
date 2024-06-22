@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Container, Typography, TextField, Button, Box } from "@mui/material";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
 const baseURL = "http://127.0.0.1:8000/api";
 
 const QuestionCreate = () => {
   const navigate = useNavigate();
   const { examId } = useParams();
+
   const [formData, setFormData] = useState({
     question: "",
     options: ["", "", "", ""],
@@ -21,6 +32,8 @@ const QuestionCreate = () => {
       const updatedOptions = [...formData.options];
       updatedOptions[index] = e.target.value;
       setFormData({ ...formData, options: updatedOptions });
+    } else if (e.target.name === "answer") {
+      setFormData({ ...formData, answer: e.target.value });
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
@@ -28,6 +41,18 @@ const QuestionCreate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate if the answer is one of the options
+    if (
+      formData.answer === "" ||
+      isNaN(formData.answer) ||
+      formData.answer < 0 ||
+      formData.answer >= formData.options.length
+    ) {
+      toast.error("Please select a valid answer from the options provided.");
+      return;
+    }
+
     try {
       const response = await axios.post(`${baseURL}/questions`, formData, {
         headers: {
@@ -108,18 +133,24 @@ const QuestionCreate = () => {
               sx={{ mb: 2 }}
             />
           ))}
-          <TextField
-            fullWidth
-            id="answer"
-            name="answer"
-            label="Answer"
-            variant="outlined"
-            value={formData.answer}
-            onChange={handleChange}
-            placeholder="Answer"
-            required
-            sx={{ mb: 2 }}
-          />
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel id="answer-label">Answer</InputLabel>
+            <Select
+              labelId="answer-label"
+              id="answer"
+              name="answer"
+              value={formData.answer}
+              onChange={(e) => handleChange(e)}
+              label="Answer"
+              required
+            >
+              {formData.options.map((option, index) => (
+                <MenuItem key={index} value={index}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Box sx={{ textAlign: "center" }}>
             <Button
               type="submit"
