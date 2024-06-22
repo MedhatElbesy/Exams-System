@@ -1,17 +1,17 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-
+import "../../index.css";
 const Footer = () => {
   return (
     <Box
       component="footer"
+      className="main-bgColor"
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#3949a0",
         color: "white",
-        py: 2,
+        py: 1,
         mt: 5,
         width: "100%",
       }}

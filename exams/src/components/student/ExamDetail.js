@@ -8,6 +8,7 @@ import {
   Button,
   Grid,
   CircularProgress,
+  Box,
 } from "@mui/material";
 
 const ExamDetail = () => {
@@ -27,30 +28,49 @@ const ExamDetail = () => {
           <CircularProgress />
         </Grid>
       ) : exam ? (
-        <Paper elevation={3} sx={{ p: 3 }}>
-          <Typography variant="h4" component="h2" gutterBottom>
-            {exam.title}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            {exam.description}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Number of Questions: {exam.questions.length}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Duration: {exam.duration} minutes
-          </Typography>
-          <Button
-            onClick={handleStartExam}
-            variant="contained"
-            color="primary"
-            sx={{ mt: 3 }}
+        <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
+          <Typography
+            variant="h4"
+            component="h2"
+            align="center"
+            gutterBottom
+            className="main-textColor"
+            sx={{
+              fontWeight: 600,
+              marginBottom: "1rem",
+            }}
           >
-            Start Exam
-          </Button>
+            <span className="sec-textColor">Exam:</span> {exam.title} 
+          </Typography>
+          <Box sx={{ mb: 2, textAlign: "center", color: "#555" }}>
+            <Typography variant="body1" gutterBottom sx={{fontSize: "22px"}} className="sec-textColor">
+              {exam.description}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Number of Questions: {exam.questions.length}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Duration: {exam.duration} minutes
+            </Typography>
+          </Box>
+          <Grid container justifyContent="center">
+            <Button
+              onClick={handleStartExam}
+              variant="outlined"
+              className="main-borderColor sec-textColor"
+              sx={{
+                mt: 3,
+                fontWeight: "bold",
+              }}
+            >
+              Start Exam
+            </Button>
+          </Grid>
         </Paper>
       ) : (
-        <Typography variant="body1">Exam not found.</Typography>
+        <Typography variant="body1" align="center">
+          Exam not found.
+        </Typography>
       )}
     </Container>
   );

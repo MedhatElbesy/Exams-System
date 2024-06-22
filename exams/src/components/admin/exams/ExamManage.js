@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExams } from "../../../store/slices/examSlice";
 import { Link } from "react-router-dom";
+import "../../../index.css";
+
 import {
   Container,
   Typography,
@@ -9,7 +11,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Paper,
   Grid,
   Button,
   Box,
@@ -28,40 +29,40 @@ const ExamList = () => {
       <Typography
         variant="h4"
         align="center"
+        className="main-textColor"
         gutterBottom
         sx={{
           fontWeight: 600,
-          color: "#3949a0",
           marginBottom: "1.5rem",
         }}
       >
         Available Exams
       </Typography>
-      <Grid container justifyContent="center">
-        <Grid item xs={12} md={8}>
-          <Paper elevation={3} sx={{ p: 2 }}>
-            {loading ? (
-              <Grid
-                container
-                justifyContent="center"
-                alignItems="center"
-                sx={{ height: 300 }}
-              >
-                <CircularProgress />
-              </Grid>
-            ) : (
-              <List sx={{ width: "100%" }}>
-                {exams.map((exam) => (
+      <Grid item xs={12} md={10}>
+        <Box elevation={3} sx={{ p: 2 }}>
+          {loading ? (
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              sx={{ height: 300 }}
+            >
+              <CircularProgress />
+            </Grid>
+          ) : (
+            <List sx={{ width: "100%" }}>
+              {exams.length > 0 ? (
+                exams.map((exam) => (
                   <ListItem
                     key={exam._id}
                     sx={{
                       borderRadius: 4,
-                      mb: 2,
-                      bgcolor: "#ffffff",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                      mb: 3,
+                      bgcolor: "#FFF",
+                      boxShadow: "0 0px 4px #9cbb0159",
                       transition: "transform 0.2s, box-shadow 0.2s",
                       "&:hover": {
-                        boxShadow: "0 6px 12px rgba(0,0,0,0.2)",
+                        boxShadow: "0 0px 8px #9cbb0159",
                       },
                     }}
                   >
@@ -69,7 +70,8 @@ const ExamList = () => {
                       primary={
                         <Typography
                           variant="h6"
-                          sx={{ color: "#3949a0", fontWeight: 600 }}
+                          className="sec-textColor"
+                          sx={{ fontWeight: 600 }}
                         >
                           {exam.title}
                         </Typography>
@@ -82,8 +84,8 @@ const ExamList = () => {
                     />
                     <Box sx={{ ml: "auto", display: "flex" }}>
                       <Button
-                        variant="contained"
-                        color="primary"
+                        variant="outlined"
+                        className="main-borderColor sec-textColor"
                         sx={{ mr: 1 }}
                         component={Link}
                         to={`/admin/${exam._id}/edit`}
@@ -92,7 +94,7 @@ const ExamList = () => {
                       </Button>
                       <Button
                         variant="outlined"
-                        color="secondary"
+                        className="main-borderColor sec-textColor"
                         sx={{ mr: 1 }}
                         component={Link}
                         to={`/admin/${exam._id}/add-question`}
@@ -101,7 +103,7 @@ const ExamList = () => {
                       </Button>
                       <Button
                         variant="outlined"
-                        color="primary"
+                        className="main-borderColor sec-textColor"
                         component={Link}
                         to={`/admin/exams/${exam._id}/edit-questions`}
                       >
@@ -109,21 +111,29 @@ const ExamList = () => {
                       </Button>
                     </Box>
                   </ListItem>
-                ))}
-              </List>
-            )}
-            {error && (
-              <Typography
-                color="error"
-                variant="body2"
-                align="center"
-                sx={{ mt: 2 }}
-              >
-                {error}
-              </Typography>
-            )}
-          </Paper>
-        </Grid>
+                ))
+              ) : (
+                <Typography
+                  variant="h6"
+                  align="center"
+                  className="sec-textColor"
+                >
+                  No Exams Available
+                </Typography>
+              )}
+            </List>
+          )}
+          {error && (
+            <Typography
+              color="error"
+              variant="body2"
+              align="center"
+              sx={{ mt: 2 }}
+            >
+              {error}
+            </Typography>
+          )}
+        </Box>
       </Grid>
     </Container>
   );

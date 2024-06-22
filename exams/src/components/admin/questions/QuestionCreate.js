@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import "../../../index.css";
 import { toast } from "react-toastify";
 import { Container, Typography, TextField, Button, Box } from "@mui/material";
 
@@ -62,7 +62,7 @@ const QuestionCreate = () => {
     <Container maxWidth="md" sx={{ mt: 4 }}>
       <Box
         sx={{
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#fdfdfd",
           borderRadius: 8,
           boxShadow: 3,
           p: 4,
@@ -70,7 +70,7 @@ const QuestionCreate = () => {
       >
         <Button
           sx={{ fontSize: "28px", p: 1 }}
-          color="secondary"
+          className="sec-textColor"
           onClick={() => navigate("/admin/manage")}
         >
           ⬅
@@ -80,7 +80,7 @@ const QuestionCreate = () => {
           component="h3"
           align="center"
           gutterBottom
-          sx={{ color: "#3949a0" }}
+          className="main-textColor"
         >
           Add New Question
         </Typography>
@@ -127,8 +127,8 @@ const QuestionCreate = () => {
           <Box sx={{ textAlign: "center" }}>
             <Button
               type="submit"
-              variant="contained"
-              color="primary"
+              variant="outlined"
+              className="main-borderColor sec-textColor"
               sx={{ mt: 2 }}
             >
               Add Question

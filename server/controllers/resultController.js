@@ -64,8 +64,7 @@ const submitExamResult = async (req, res) => {
   }
 };
 
-// Controller function to fetch all exam results
-const getExamResults = async (req, res) => {
+const getExamResult = async (req, res) => {
   const { examId } = req.params;
 
   try {
@@ -82,7 +81,24 @@ const getExamResults = async (req, res) => {
   }
 };
 
+const getAllResults = async (req, res) => {
+  try {
+    const results = await ExamResult.find({
+      student: req.user.id,
+    })
+      .populate("exam", "title questions")
+      .select("_id score exam createdAt")
+      .exec();
+
+    res.json(results);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch exam results" });
+  }
+};
+
+
 module.exports = {
   submitExamResult,
-  getExamResults,
+  getExamResult,
+  getAllResults,
 };

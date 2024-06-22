@@ -44,6 +44,7 @@ const authSlice = createSlice({
       state.isAdmin = false;
       sessionStorage.removeItem("isAdmin");
       sessionStorage.removeItem("token");
+      sessionStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
@@ -65,6 +66,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.isAuthenticated = true;
+        sessionStorage.setItem("user", state.user.username);
         sessionStorage.setItem("token", action.payload.token);
         action.payload.user.isAdmin && sessionStorage.setItem(
           "isAdmin",

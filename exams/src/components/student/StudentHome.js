@@ -18,7 +18,8 @@ const Home = () => {
         component="h1"
         align="center"
         gutterBottom
-        sx={{ color: "#3949a0", fontWeight: "bold" }}
+        className="sec-textColor"
+        sx={{ fontWeight: "bold" }}
       >
         Welcome to Exam System
       </Typography>
@@ -29,11 +30,11 @@ const Home = () => {
               sx={{
                 height: "100%",
                 backgroundColor: "#f0f4ff",
-                border: "1px solid #3949a0",
+                border: "1px solid #1a237e",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 transition: "transform 0.3s ease-in-out",
                 "&:hover": {
-                  transform: "scale(1.05)",
+                  transform: "scale(1.01)",
                 },
               }}
             >
@@ -42,7 +43,7 @@ const Home = () => {
                   variant="h6"
                   component="h2"
                   gutterBottom
-                  sx={{ color: "#1a237e" }}
+                  className="sec-textColor"
                 >
                   Take an Exam
                 </Typography>
@@ -54,11 +55,11 @@ const Home = () => {
                   <Button
                     component={RouterLink}
                     to="/exams"
-                    variant="contained"
-                    color="primary"
                     fullWidth
+                    className="main-bgColor"
                     sx={{
-                      backgroundColor: "#3949a0",
+                      color: "#FFF",
+                      fontWeight: "bold",
                       "&:hover": {
                         backgroundColor: "#1a237e",
                       },
@@ -70,16 +71,16 @@ const Home = () => {
               </CardContent>
             </Card>
           </Grid>
-          {/* <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <Card
               sx={{
                 height: "100%",
                 backgroundColor: "#f0f4ff",
-                border: "1px solid #3949a0",
+                border: "1px solid #1a237e",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 transition: "transform 0.3s ease-in-out",
                 "&:hover": {
-                  transform: "scale(1.05)",
+                  transform: "scale(1.01)",
                 },
               }}
             >
@@ -88,22 +89,22 @@ const Home = () => {
                   variant="h6"
                   component="h2"
                   gutterBottom
-                  sx={{ color: "#1a237e" }}
+                  className="sec-textColor"
                 >
-                  View Results
+                  View All Results
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Check your exam results and track your progress.
+                  Check your exam results for all exams and track your progress.
                 </Typography>
                 <Box sx={{ mt: 2 }}>
                   <Button
                     component={RouterLink}
                     to="/results"
-                    variant="contained"
-                    color="primary"
                     fullWidth
+                    className="main-bgColor"
                     sx={{
-                      backgroundColor: "#3949a0",
+                      color: "#FFF",
+                      fontWeight: "bold",
                       "&:hover": {
                         backgroundColor: "#1a237e",
                       },
@@ -114,7 +115,7 @@ const Home = () => {
                 </Box>
               </CardContent>
             </Card>
-          </Grid> */}
+          </Grid>
         </Grid>
       </Box>
     </Container>

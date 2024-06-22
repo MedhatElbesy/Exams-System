@@ -64,33 +64,39 @@ const ExamTake = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
-      <Paper elevation={3} sx={{ p: 3, width: "100%" }}>
-        <Button
-          sx={{ fontSize: "28px", p: 1 }}
-          color="secondary"
-          onClick={() => navigate("/exams")}
-        >
-          ⬅
-        </Button>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <ExamHeader title={exam.title} timeLeft={timeLeft} />
-          </Grid>
-          <Grid item xs={12}>
-            <AnswerForm
-              exam={exam}
-              answers={answers}
-              handleChange={handleChange}
+      {loading ? (
+        <Grid container justifyContent="center" sx={{ mt: 4 }}>
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <Paper elevation={3} sx={{ p: 3, width: "100%" }}>
+          <Button
+            sx={{ fontSize: "28px", p: 1 }}
+            className="sec-textColor"
+            onClick={() => navigate("/exams")}
+          >
+            ⬅
+          </Button>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <ExamHeader title={exam.title} timeLeft={timeLeft} />
+            </Grid>
+            <Grid item xs={12}>
+              <AnswerForm
+                exam={exam}
+                answers={answers}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+              />
+            </Grid>
+            <Timer
+              timeLeft={timeLeft}
+              setTimeLeft={setTimeLeft}
               handleSubmit={handleSubmit}
             />
           </Grid>
-          <Timer
-            timeLeft={timeLeft}
-            setTimeLeft={setTimeLeft}
-            handleSubmit={handleSubmit}
-          />
-        </Grid>
-      </Paper>
+        </Paper>
+      )}
     </Container>
   );
 };

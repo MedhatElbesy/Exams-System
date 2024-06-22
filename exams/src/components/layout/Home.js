@@ -33,7 +33,7 @@ const Welcome = () => {
         component="h1"
         gutterBottom
         sx={{
-          background: "linear-gradient(45deg, #3f51b5 30%, #9c27b0 90%)",
+          background: "linear-gradient(45deg, #0B3782 30%, #9cbb01 90%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           fontWeight: "bold",
@@ -72,11 +72,12 @@ const Welcome = () => {
           color="primary"
           onClick={handleStart}
           sx={{
-            backgroundColor: "#3f51b5",
+            backgroundColor: "#0B3782",
             px: 4,
             py: 2,
+            fontWeight: "bold",
             "&:hover": {
-              backgroundColor: "#303f9f",
+              backgroundColor: "#0B37a1",
             },
           }}
         >

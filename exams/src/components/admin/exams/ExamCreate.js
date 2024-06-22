@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createExam } from "../../../store/slices/examSlice";
 import { useNavigate } from "react-router-dom";
+import "../../../index.css";
 import {
   Container,
   Typography,
@@ -11,7 +12,6 @@ import {
   Grid,
 } from "@mui/material";
 import { toast } from "react-toastify";
-
 
 const ExamCreate = () => {
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ const ExamCreate = () => {
     e.preventDefault();
     try {
       const newExam = await dispatch(createExam(formData)).unwrap();
+      toast.success("Exam Created Successfully")
       navigate(`/admin/${newExam.id}/add-question`);
     } catch (error) {
       const message = error.data.message;
@@ -56,7 +57,7 @@ const ExamCreate = () => {
       >
         <Button
           sx={{ fontSize: "28px", p: 1 }}
-          color="secondary"
+          className="sec-textColor"
           onClick={() => navigate("/admin")}
         >
           ⬅
@@ -66,7 +67,7 @@ const ExamCreate = () => {
           component="h2"
           align="center"
           gutterBottom
-          sx={{ color: "#3949a0" }}
+          className="main-textColor"
         >
           Create New Exam
         </Typography>
@@ -110,14 +111,16 @@ const ExamCreate = () => {
               />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
-          >
-            Create Exam
-          </Button>
+          <Box sx={{ textAlign: "center" }}>
+            <Button
+              type="submit"
+              variant="outlined"
+              className="main-borderColor sec-textColor"
+              sx={{ mt: 2, fontWeight: "bold" }}
+            >
+              Create Exam
+            </Button>
+          </Box>
         </form>
       </Box>
     </Container>

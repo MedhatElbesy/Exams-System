@@ -20,9 +20,9 @@ const AnswerForm = ({ exam, answers, handleChange, handleSubmit }) => {
       <Box sx={{ textAlign: "center" }}>
         <Button
           type="submit"
-          variant="contained"
-          color="primary"
-          sx={{ mt: 3, px: 4}}
+          variant="outlined"
+          className="main-borderColor sec-textColor"
+          sx={{ mt: 3, fontWeight: "bold" }}
         >
           Submit Exam
         </Button>

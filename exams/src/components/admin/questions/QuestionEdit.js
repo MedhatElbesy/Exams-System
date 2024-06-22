@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import "../../../index.css";
 import {
   Container,
   TextField,
@@ -130,8 +131,8 @@ const QuestionsEdit = () => {
       ) : (
         <Paper elevation={3} sx={{ p: 3 }}>
           <Button
-            sx={{ fontSize: "28px", p: 1 }}
-            color="secondary"
+            sx={{ fontSize: "28px", p: 1, backgroundColor: "#fdfdfd" }}
+            className="sec-textColor"
             onClick={() => navigate("/admin/manage")}
           >
             ⬅
@@ -141,14 +142,19 @@ const QuestionsEdit = () => {
             component="h2"
             align="center"
             gutterBottom
-            sx={{ color: "#3949a0" }}
+            className="main-textColor"
           >
             Edit Questions
           </Typography>
           {questions.length > 0 ? (
             questions.map((question, qIndex) => (
               <Box key={question._id} sx={{ mb: 3 }}>
-                <Typography variant="h6" component="h3" gutterBottom>
+                <Typography
+                  variant="h6"
+                  component="h3"
+                  gutterBottom
+                  className="sec-textColor"
+                >
                   Question {qIndex + 1}
                 </Typography>
                 <TextField
@@ -182,12 +188,12 @@ const QuestionsEdit = () => {
                 />
                 <Box sx={{ textAlign: "center" }}>
                   <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ mt: 2, mr: 2 }}
+                    variant="outlined"
+                    className="main-borderColor sec-textColor"
+                    sx={{ mt: 2, mr: 2, fontWeight: "bold" }}
                     onClick={() => handleEditQuestion(question._id, qIndex)}
                   >
-                    Save Question
+                    Edit Question
                   </Button>
                   <Button
                     variant="contained"
@@ -195,14 +201,14 @@ const QuestionsEdit = () => {
                     sx={{ mt: 2 }}
                     onClick={() => handleDelete(question._id)}
                   >
-                    Delete Question
+                    Delete
                   </Button>
                 </Box>
               </Box>
             ))
           ) : (
-            <Typography variant="h6" align="center">
-              No questions available
+            <Typography variant="h6" align="center" className="sec-textColor">
+              No Questions Available
             </Typography>
           )}
           {error && (

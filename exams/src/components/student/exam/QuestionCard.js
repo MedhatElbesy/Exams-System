@@ -26,8 +26,8 @@ const QuestionCard = ({ question, index, selectedOption, handleChange }) => {
         <Grid container alignItems="center" spacing={2}>
           <Grid item>
             <Avatar
+              className="main-bgColor"
               sx={{
-                bgcolor: "#3f51b5",
                 width: 30,
                 height: 30,
                 fontSize: "1rem",
@@ -58,7 +58,7 @@ const QuestionCard = ({ question, index, selectedOption, handleChange }) => {
               <FormControlLabel
                 key={idx}
                 value={option}
-                control={<Radio sx={{ color: "#3f51b5" }} />}
+                control={<Radio className="sec-textColor" />}
                 label={
                   <Typography
                     sx={{

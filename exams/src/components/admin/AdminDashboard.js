@@ -9,6 +9,7 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
+import "../../index.css";
 
 const AdminDashboard = () => {
   return (
@@ -16,9 +17,9 @@ const AdminDashboard = () => {
       <Paper
         sx={{
           margin: "40px auto",
-          padding: "32px",
+          p: 3,
           maxWidth: "600px",
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#fdfdfd",
           borderRadius: "8px",
           boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
         }}
@@ -26,10 +27,10 @@ const AdminDashboard = () => {
         <Typography
           variant="h4"
           component="h2"
+          className="main-textColor"
           sx={{
             marginBottom: "24px",
             textAlign: "center",
-            color: "#3949a0",
             fontWeight: "bold",
           }}
         >
@@ -39,14 +40,14 @@ const AdminDashboard = () => {
           <ListItem
             component={Link}
             to="manage"
+            className="sec-textColor"
             sx={{
               borderBottom: "1px solid #ccc",
-              color: "#3949a0",
               fontWeight: "bold",
               textDecoration: "none",
               transition: "transform 0.3s ease-in-out",
               "&:hover": {
-                backgroundColor: "#e0e0e0",
+                backgroundColor: "#a8ca0036",
               },
             }}
           >
@@ -56,14 +57,14 @@ const AdminDashboard = () => {
           <ListItem
             component={Link}
             to="create-exam"
+            className="sec-textColor"
             sx={{
               borderBottom: "1px solid #ccc",
-              color: "#3949a0",
               fontWeight: "bold",
               textDecoration: "none",
               transition: "transform 0.3s ease-in-out",
               "&:hover": {
-                backgroundColor: "#e0e0e0",
+                backgroundColor: "#a8ca0036",
               },
             }}
           >

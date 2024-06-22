@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "../../../index.css";
 import {
   updateExam,
   fetchExamById,
@@ -102,7 +103,7 @@ const ExamEdit = () => {
         <Paper elevation={3} sx={{ p: 3 }}>
           <Button
             sx={{ fontSize: "28px", p: 1 }}
-            color="secondary"
+            className="sec-textColor"
             onClick={() => navigate("/admin/manage")}
           >
             ⬅
@@ -112,7 +113,7 @@ const ExamEdit = () => {
             component="h2"
             align="center"
             gutterBottom
-            sx={{ color: "#3949a0" }}
+            className="main-textColor"
           >
             Edit Exam
           </Typography>
@@ -147,9 +148,9 @@ const ExamEdit = () => {
             <Box sx={{ textAlign: "center" }}>
               <Button
                 type="submit"
-                variant="contained"
-                color="primary"
-                sx={{ mt: 2, mr: 2 }}
+                variant="outlined"
+                className="main-borderColor sec-textColor"
+                sx={{ mt: 2, mr: 2, fontWeight: "bold" }}
               >
                 Edit Exam
               </Button>
@@ -159,7 +160,7 @@ const ExamEdit = () => {
                 sx={{ mt: 2, mr: 2 }}
                 onClick={handleDelete}
               >
-                Delete Exam
+                Delete
               </Button>
             </Box>
           </form>

@@ -17,6 +17,7 @@ import ExamList from "./components/student/ExamList";
 import ExamDetail from "./components/student/ExamDetail";
 import ExamTake from "./components/student/ExamTake";
 import Results from "./components/student/Result";
+import AllResults from "./components/student/AllResults";
 
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ExamCreate from "./components/admin/exams/ExamCreate";
@@ -48,6 +49,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<StudentHome />} />
             <Route path="/exams" element={<ExamList />} />
+            <Route path="/results" element={<AllResults />} />
             <Route path="/exams/:examId" element={<ExamDetail />} />
             <Route path="/exams/:examId/take" element={<ExamTake />} />
             <Route path="/exams/:examId/results" element={<Results />} />

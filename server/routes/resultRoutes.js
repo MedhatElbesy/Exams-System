@@ -3,11 +3,13 @@ const router = express.Router();
 const authMiddleware = require("../middleware/authMiddleware");
 const {
   submitExamResult,
-  getExamResults,
+  getExamResult,
+  getAllResults
 } = require("../controllers/resultController");
 
 router.post("/:examId", authMiddleware, submitExamResult);
 
-router.get("/:examId", authMiddleware, getExamResults);
+router.get("/", authMiddleware, getAllResults);
+router.get("/:examId", authMiddleware, getExamResult);
 
 module.exports = router;

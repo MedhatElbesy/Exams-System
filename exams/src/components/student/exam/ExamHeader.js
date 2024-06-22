@@ -17,7 +17,8 @@ const ExamHeader = ({ title, timeLeft }) => {
         variant="h3"
         component="h2"
         gutterBottom
-        sx={{ fontWeight: 600, color: "#3f51b5" }}
+        className="main-textColor"
+        sx={{ fontWeight: 600 }}
       >
         {title} Exam
       </Typography>

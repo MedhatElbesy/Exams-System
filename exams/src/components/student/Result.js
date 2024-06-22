@@ -32,13 +32,12 @@ const Results = () => {
         sx={{
           p: 3,
           borderRadius: 4,
-          backgroundColor: "#f3f4f6",
           boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Button
           sx={{ fontSize: "28px", p: 1 }}
-          color="secondary"
+          className="sec-textColor"
           onClick={() => navigate("/exams")}
         >
           ⬅
@@ -48,8 +47,8 @@ const Results = () => {
           component="h2"
           align="center"
           gutterBottom
+          className="main-textColor"
           sx={{
-            color: "#1a237e",
             fontWeight: 600,
             marginBottom: "1.5rem",
           }}
@@ -76,7 +75,7 @@ const Results = () => {
                 sx={{
                   borderRadius: 2,
                   mb: 2,
-                  bgcolor: "#fff",
+                  bgcolor: "#f5f5f5",
                   border: "1px solid #D1D1D1",
                   textAlign: "center",
                   p: 2,
@@ -87,11 +86,10 @@ const Results = () => {
                     <Typography
                       variant="h6"
                       component="p"
-                      sx={{ color: "#1a237e", fontWeight: 600 }}
+                      className="main-textColor"
+                      sx={{ fontWeight: "bold" }}
                     >
-                      {result.exam && result.exam.title
-                        ? `${result.exam.title} Exam:`
-                        : "Unknown Exam:"}
+                      <span className="sec-textColor">Exam:</span> {result.exam.title}
                     </Typography>
                   }
                   secondary={

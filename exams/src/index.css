@@ -1,4 +1,9 @@
-body {
+
+:root {
+  --bgColor: #0B3782;
+  --textColor: #9cbb01;
+}
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -18,3 +23,31 @@ header {
 .MuiContainer-root {
   flex-grow: 1;
 }
+/* Navbar */
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.main-bgColor {
+  background-color: var(--bgColor) !important;
+}
+
+.main-borderColor {
+  border-color: var(--bgColor) !important;
+}
+.main-borderColor:hover {
+  background-color: var(--bgColor) !important;
+  color: #FFF !important;
+}
+
+.main-textColor {
+  color: var(--textColor) !important;
+}
+.sec-textColor {
+  color: var(--bgColor) !important;
+}
+.hoverColor {
+  color: #a8ca0036 !important;
+}
+

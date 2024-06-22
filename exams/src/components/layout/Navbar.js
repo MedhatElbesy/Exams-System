@@ -1,8 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Box, Button as MuiButton, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/slices/authSlice";
+import logoImage from "../../assets/logo.png";
+import { styled } from "@mui/system";
+import "../../index.css";
+
+const StyledButton = styled(MuiButton)(({ theme }) => ({
+  color: "#9cbb01",
+  fontWeight: "bold",
+  "&:hover": {
+    color: "#FFF",
+    backgroundColor: "#9cbb01",
+  },
+}));
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -24,55 +36,69 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ flexGrow: 1, backgroundColor: "#3949a0" }}>
+    <AppBar position="static" sx={{ flexGrow: 1 }} className="main-bgColor">
       <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }}>
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            Home
+            <img
+              src={logoImage}
+              alt="Logo"
+              style={{ height: 40, marginRight: 10 }}
+            />
           </Link>
-        </Typography>
+        </Box>
         {isLoggedIn ? (
           <>
+            <Box sx={{ flexGrow: 1 }}>
+              <Typography sx={{fontWeight: "bold", fontSize: "22px"}}>{sessionStorage.getItem("user")}</Typography>
+            </Box>
             {isAdmin && (
               <>
-                <Button
+                <StyledButton
                   color="inherit"
                   component={Link}
                   to="/admin/manage"
                 >
                   Manage
-                </Button>
-                <Button
+                </StyledButton>
+                <StyledButton
                   color="inherit"
                   component={Link}
                   to="/admin/create-exam"
                 >
                   Create
-                </Button>
+                </StyledButton>
               </>
             )}
             {!isAdmin && (
-              <Button color="inherit" component={Link} to="/exams">
+              <StyledButton color="inherit" component={Link} to="/exams">
                 Exams
-              </Button>
+              </StyledButton>
             )}
-            <Button
+            <StyledButton
               color="inherit"
               onClick={handleLogout}
               component={Link}
               to="/"
+              sx={{
+                color: "#dc3545",
+                "&:hover": {
+                  color: "#FFF",
+                  backgroundColor: "#dc3545",
+                },
+              }}
             >
               Logout
-            </Button>
+            </StyledButton>
           </>
         ) : (
           <>
-            <Button color="inherit" component={Link} to="/login">
+            <StyledButton color="inherit" component={Link} to="/login">
               Login
-            </Button>
-            <Button color="inherit" component={Link} to="/register">
+            </StyledButton>
+            <StyledButton color="inherit" component={Link} to="/register">
               Register
-            </Button>
+            </StyledButton>
           </>
         )}
       </Toolbar>
