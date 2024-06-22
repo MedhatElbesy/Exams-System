@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createExam } from "../../../store/slices/examSlice";
 import { useNavigate } from "react-router-dom";
-import "../../../index.css";
 import {
   Container,
   Typography,

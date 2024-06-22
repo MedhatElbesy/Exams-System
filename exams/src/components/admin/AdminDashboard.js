@@ -9,7 +9,6 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import "../../index.css";
 
 const AdminDashboard = () => {
   return (

@@ -22,12 +22,6 @@ const ExamList = () => {
     dispatch(fetchExams());
   }, [dispatch]);
 
-  const handelExamNavigation = (examId) => {
-    sessionStorage.getItem("isAdmin")
-      ? navigate(`/admin/${examId}/edit`)
-      : navigate(`/exams/${examId}`);
-  };
-
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
       <Typography
@@ -43,9 +37,9 @@ const ExamList = () => {
       >
         Available Exams
       </Typography>
-      {exams.length > 0 ? (
-        <Grid container justifyContent="center">
-          <Grid item xs={12} sm={8}>
+      <Grid container justifyContent="center">
+        <Grid item xs={12} sm={8}>
+          {exams.length > 0 ? (
             <Box>
               {loading ? (
                 <Grid container justifyContent="center" sx={{ mt: 4 }}>
@@ -58,7 +52,7 @@ const ExamList = () => {
                       key={exam._id}
                       onClick={() =>
                         exam.questions.length > 0 &&
-                        handelExamNavigation(exam._id)
+                        navigate(`/exams/${exam._id}`)
                       }
                       sx={{
                         borderRadius: 2,
@@ -82,7 +76,9 @@ const ExamList = () => {
                               variant="h6"
                               className="sec-textColor"
                               sx={{
-                                color: exam.questions.length === 0 && "#555 !important",
+                                color:
+                                  exam.questions.length === 0 &&
+                                  "#555 !important",
                                 fontWeight: 600,
                               }}
                             >
@@ -115,13 +111,13 @@ const ExamList = () => {
                 </Typography>
               )}
             </Box>
-          </Grid>
+          ) : (
+            <Typography variant="h6" align="center" className="sec-textColor">
+              No Exams Available
+            </Typography>
+          )}
         </Grid>
-      ) : (
-        <Typography variant="h6" align="center" className="sec-textColor">
-          No Exams Available
-        </Typography>
-      )}
+      </Grid>
     </Container>
   );
 };

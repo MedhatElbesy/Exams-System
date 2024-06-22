@@ -81,7 +81,12 @@ const questionSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+      .addCase(updateQuestion.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(updateQuestion.fulfilled, (state, action) => {
+        state.loading = false;
         const index = state.questions.findIndex(
           (q) => q._id === action.payload._id
         );
@@ -89,12 +94,22 @@ const questionSlice = createSlice({
           state.questions[index] = action.payload;
         }
       })
+      .addCase(updateQuestion.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteQuestion.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(deleteQuestion.fulfilled, (state, action) => {
+        state.loading = false;
         state.questions = state.questions.filter(
           (q) => q._id !== action.payload.questionId
         );
       })
       .addCase(deleteQuestion.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload;
       });
   },

@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExams } from "../../../store/slices/examSlice";
 import { Link } from "react-router-dom";
-import "../../../index.css";
-
 import {
   Container,
   Typography,

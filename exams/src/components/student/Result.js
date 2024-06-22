@@ -6,7 +6,7 @@ import {
   Container,
   Typography,
   CircularProgress,
-  Box,
+  Grid,
   Paper,
   List,
   ListItem,
@@ -28,7 +28,6 @@ const Results = () => {
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
       <Paper
-        elevation={4}
         sx={{
           p: 3,
           borderRadius: 4,
@@ -56,16 +55,9 @@ const Results = () => {
           Exam Result
         </Typography>
         {loading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minHeight: "200px",
-            }}
-          >
+          <Grid container justifyContent="center" sx={{ mt: 4 }}>
             <CircularProgress />
-          </Box>
+          </Grid>
         ) : (
           <List sx={{ width: "100%" }}>
             {results.map((result) => (
@@ -89,7 +81,8 @@ const Results = () => {
                       className="main-textColor"
                       sx={{ fontWeight: "bold" }}
                     >
-                      <span className="sec-textColor">Exam:</span> {result.exam.title}
+                      <span className="sec-textColor">Exam:</span>{" "}
+                      {result.exam.title}
                     </Typography>
                   }
                   secondary={

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../../../index.css";
 import { toast } from "react-toastify";
 import { Container, Typography, TextField, Button, Box } from "@mui/material";
 
@@ -10,8 +9,6 @@ const baseURL = "http://127.0.0.1:8000/api";
 const QuestionCreate = () => {
   const navigate = useNavigate();
   const { examId } = useParams();
-
-
   const [formData, setFormData] = useState({
     question: "",
     options: ["", "", "", ""],
@@ -44,7 +41,6 @@ const QuestionCreate = () => {
         answer: "",
         examId,
       });
-      // navigate(`/admin/manage`);
     } catch (error) {
       const status = error.response.status;
       const message = error.response.data;
@@ -76,7 +72,7 @@ const QuestionCreate = () => {
           ⬅
         </Button>
         <Typography
-          variant="h4"
+          variant="h3"
           component="h3"
           align="center"
           gutterBottom
