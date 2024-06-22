@@ -14,31 +14,48 @@ import {
 
 const Register = () => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
+
   const [error, setError] = useState("");
 
+  // Regular expressions for validation
+  const emailRegex = /\S+@\S+\.\S+/;
+  const usernameRegex = /^[a-zA-Z]+$/;
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setFormData({ ...formData, [name]: value });
+    if (name === "username") {
+      setError(""); // Clear error when typing
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!usernameRegex.test(formData.username)) {
+      setError("Username should contain only alphabetic characters");
+      return;
+    }
+
     if (!formData.username) {
       setError("Please enter a valid username");
       return;
-    } else if (!formData.email) {
+    } else if (!formData.email || !emailRegex.test(formData.email)) {
       setError("Please enter a valid email address");
       return;
     } else if (!formData.password) {
       setError("Please enter a valid password");
       return;
     }
+
     try {
       await dispatch(registerUser(formData)).unwrap();
       toast.success("Registered Successfully");
@@ -109,7 +126,6 @@ const Register = () => {
             autoFocus
             value={formData.username}
             onChange={handleChange}
-            onFocus={() => setError("")}
             sx={{ bgcolor: "white", borderRadius: 1 }}
           />
           <TextField
@@ -121,7 +137,6 @@ const Register = () => {
             autoComplete="email"
             value={formData.email}
             onChange={handleChange}
-            onFocus={() => setError("")}
             sx={{ bgcolor: "white", borderRadius: 1 }}
           />
           <TextField
@@ -134,7 +149,6 @@ const Register = () => {
             autoComplete="current-password"
             value={formData.password}
             onChange={handleChange}
-            onFocus={() => setError("")}
             sx={{ bgcolor: "white", borderRadius: 1 }}
           />
           {error && (
